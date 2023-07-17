@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Web Game</title>
+  <style>
+    body {
+      text-align: center;
+      padding-top: 200px;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    #timer {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click the Button!</h1>
+  <button id="gameButton" onclick="increaseScore()">Click Me!</button>
+  <p>Score: <span id="score">0</span></p>
+  <p id="timer">Time Left: 60 seconds</p>
+  <script>
+    var score = 0;
+    var timeLeft = 60;
+    var timerId;
+
+    function startGame() {
+      timerId = setInterval(updateTime, 1000);
+    }
+
+    function updateTime() {
+      timeLeft--;
+      document.getElementById("timer").textContent = "Time Left: " + timeLeft + " seconds";
+      
+      if (timeLeft === 0) {
+        endGame();
+      }
+    }
+
+    function increaseScore() {
+      score++;
+      document.getElementById("score").textContent = score;
+    }
+
+    function endGame() {
+      clearInterval(timerId);
+      document.getElementById("gameButton").disabled = true;
+      alert("Game Over! Your score: " + score);
+    }
+
+    // Start the game
+    startGame();
+  </script>
+</body>
+</html>
